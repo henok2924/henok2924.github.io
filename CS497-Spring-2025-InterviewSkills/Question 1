@@ -1,1 +1,13 @@
+#Question 1
+# num = array of integers
+# target = num1 + num2
+def TwoSums(nums, target):
+    for i in range (len(nums)): #itrates through the whole length of the array
+        for j in range (i+1, len(nums)): #itrates through the num array list ignoring the num1 in the array
+            if nums[i] + nums[j] == target: #adds the nums to check for target
+                print(i, j)  # returns the indexes of the two numbers
 
+#Sample
+nums = [2, 4, 5, 6, 8, 20]
+target = 9
+TwoSums(nums, target)
