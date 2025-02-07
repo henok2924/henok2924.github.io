@@ -1,1 +1,40 @@
+#Question 5
+from heapq import heappush, heappop
+from typing import List, Optional
+
+# Singly linked list definition
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val  # Store the value of the node
+        self.next = next  # Pointer to the next node
+
+# Function to merge k sorted linked lists
+def mergeKSortedLists(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+    heap = []  # Min-heap to store the nodes
+
+    # Insert the first node of each list into the heap
+    for l in lists:
+        if l:
+            heappush(heap, (l.val, l))  # Push (value, node) into the heap
+
+    if not heap:  # If the heap is empty, return None
+        return None
+
+    val, head = heappop(heap)  # Extract the smallest node from the heap
+    if head.next:
+        heappush(heap, (head.next.val, head.next))  # Push the next node into the heap
+
+    current = head  # Pointer to track the merged list
+
+    while heap:  # Process all remaining nodes
+        val, node = heappop(heap)  # Extract the next smallest node
+        current.next = node  # Append it to the merged list
+        current = current.next  # Move to the next node
+
+        if node.next:  # If there’s a next node, push it into the heap
+            heappush(heap, (node.next.val, node.next))
+
+    return head  # Return the merged linked list
+
+#sample
 
