@@ -1,1 +1,19 @@
+#Question 2
+def FirstLastPosition(nums, target):
+   firstposition = -1 #initilize first to -1
+   lastposition = -1 #initilizw last to -1
+   for i in range(0, len(nums)):
+        if nums[i] == target:
+          if firstposition == -1:
+             firstposition = i
+          lastposition = i
 
+        if firstposition == -1:  # If target is not found
+            print(-1, -1)
+        else:
+               print(firstposition, lastposition)
+
+#sample
+nums = [1,2,3,4,5,6,7,8,5,9]
+target = 5
+FirstLastPosition(nums, target)
