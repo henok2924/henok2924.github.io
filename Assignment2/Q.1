@@ -1,1 +1,15 @@
+def majElem(nums):
+    count = 0
+    elem = None
+
+    for num in nums:
+        if count  == num:
+            elem = num
+        count += 1
+    return elem
+
+#sample
+nums = [1, 2, 6, 4, 6, 4, 6, 8, 9]
+print(majElem(nums))
+
 
