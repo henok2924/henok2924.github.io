@@ -1,1 +1,44 @@
+class Solution:
+    # partition function to divide the array
+    # p = first element of the array
+    # r = last element of the array
+    # j = used to go over every element which is less than r
+    # i = no of element which are found to be =< r
+    def partition(self, p, r, nums):
+        pivot = nums[r] #
+        i = p - 1 # initial position
+
+        for j in range(p, r):
+            if nums[j] <= pivot:
+                i += 1
+                nums[i], nums[j] = nums[j], nums[i]
+
+        i += 1
+        nums[i], nums[r] = nums[r], nums[i]
+        return i # the last index of the partition
+
+    def kthLargest(self, nums, k) -> int:
+        target_index = len(nums) - k  # Convert k-th largest to index
+
+        def quickselect(p, r):
+            if p == r:
+                return nums[p]
+
+            q = self.partition(p, r, nums)  # Call the partition method correctly
+
+            if q == target_index:
+                return nums[q]
+            elif q > target_index:
+                return quickselect(p, q - 1)
+            else:
+                return quickselect(q + 1, r)
+
+        return quickselect(0, len(nums) - 1)  # Fix function call
+
+
+# Example Usage:
+nums = [1, 3, 5, 7, 9]
+k = 2
+solution = Solution()
+print(solution.kthLargest(nums, k))  # Output: 7 (2nd largest element)
 
