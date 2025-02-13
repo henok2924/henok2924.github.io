@@ -1,1 +1,18 @@
+def removeDupes(s):
+    stack = []
+    last_occurrence = {}  # Store the last index of each character
+    for i, char in enumerate(s):
+        last_occurrence[char] = i
 
+    for i, char in enumerate(s):
+        if char in stack and last_occurrence[char] > i:
+            continue
+        while stack and char < stack[-1] and last_occurrence[stack[-1]] > i:
+            stack.pop()
+        if char not in stack: #If the current char is not in the stack
+            stack.append(char) #We append it to the stack
+
+    return "".join(stack)
+
+user_input = input("Enter a string: ")
+print(removeDupes(user_input))
