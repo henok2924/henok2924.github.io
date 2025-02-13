@@ -1,1 +1,39 @@
+class Solution:
+    # ... (maximumGap method code as before) ...
+    def maximumGap(self, nums: list[int]) -> int:
+
+        #check if the list has fewer than 2 elements
+        n = len(nums) # this returns o if the element in this list is less 2.
+        if n < 2:
+            return 0
+
+        lower_val = min(nums)
+        higher_val = max(nums)
+
+        bucket_size = max(1, (higher_val - lower_val) // (n - 1))
+        bucket_count = (higher_val - lower_val) // bucket_size + 1
+        buckets = [[float('inf'), float('-inf')] for _ in range(bucket_count)]
+
+        for num in nums:
+            bucket_index = (num - lower_val) // bucket_size
+            buckets[bucket_index][0] = min(buckets[bucket_index][0], num)
+            buckets[bucket_index][1] = max(buckets[bucket_index][1], num)
+
+        max_gap = 0
+        prev_max = lower_val  # Initialize prev_max to the minimum value
+
+        for bucket_min, bucket_max in buckets:
+            if bucket_min == float('inf'):  # Skip empty buckets
+                continue
+            max_gap = max(max_gap, bucket_min - prev_max)
+            prev_max = bucket_max
+
+        return max_gap
+
+
+# Test code (outside the class)
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 15]
+solution = Solution()  # Create an instance
+print(solution.maximumGap(nums))
+
 
