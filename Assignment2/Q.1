@@ -1,15 +1,24 @@
-def majElem(nums):
-    count = 0
-    elem = None
+class Solution(object):
+    def majElem(self, nums):
+        count = 0
+        elem = None
 
-    for num in nums:
-        if count  == num:
-            elem = num
-        count += 1
-    return elem
+        for num in nums:
+            if count  == 0:
+                elem = num
+            if elem == num:
+                count += 1
+            else:
+                count -=1
+        return elem
+
 
 #sample
-nums = [1, 2, 6, 4, 6, 4, 6, 8, 9]
-print(majElem(nums))
+s = Solution()
+array = [1, 2, 6, 4, 6, 4, 6, 8]
+result = s.majElem(array)
+print(result)
+
+
 
 
